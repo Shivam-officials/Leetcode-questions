@@ -1,19 +1,29 @@
-class Solution {
-public:
-    int majorityElement(vector<int>& nums) {
-        unordered_map<int,int> hash;
-        for(auto v: nums){
-            ++hash[v];
-        }
+class Solution
+{
+    public:
+        int majorityElement(vector<int> &nums)
+        {
+            vector<int>v{nums};
+            int vote = 0;
+            int majority = v[0];	// safe to make the first element the majority alothougu it will be	//automatically set in the first iteration bcz of zero votes
 
-        int n = nums.size();
-        int ans;
-        for(auto pair: hash){
-            if(pair.second>n/2){
-                ans = pair.first;
+            for (auto item: v)
+            {
+                if (vote == 0)
+                {
+                    vote++;
+                    majority = item;
+                }
+                else if (majority == item)
+                {
+                    vote++;
+                }
+                else
+                {
+                    vote--;
+                }
             }
-        }
 
-        return ans;
-    }
+            return majority;
+        }
 };
