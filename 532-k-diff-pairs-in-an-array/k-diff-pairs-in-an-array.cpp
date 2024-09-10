@@ -3,14 +3,13 @@ class Solution
     public:
         int findPairs(vector<int> &nums, int k)
         {
-            set<pair<int,int>> setOfSets;
+            set<pair<int, int>> setOfSets;
             int low = 0;
             sort(nums.begin(), nums.end());
             int high = low + 1;
             while (high <= nums.size() - 1)
             {
                 int diff = nums[high] - nums[low];
-               
 
                 if (k == diff)
                 {
@@ -28,7 +27,7 @@ class Solution
                     high++;
                 }
 
-                if(low==high) high++;
+                if (low == high) high++;
             }
 
             return setOfSets.size();
