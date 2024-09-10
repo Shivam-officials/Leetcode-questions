@@ -9,17 +9,17 @@ class Solution
             int high = low + 1;
             while (high <= nums.size() - 1)
             {
-                int diff = nums[low] - nums[high];
-                int absDiff = abs(diff);
+                int diff = nums[high] - nums[low];
+               
 
-                if (k == absDiff)
+                if (k == diff)
                 {
                     setOfSets.insert({ nums[low],
                         nums[high] });
                     low++;
                     high++;
                 }
-                else if (absDiff > k)
+                else if (diff > k)
                 {
                     low++;
                 }
