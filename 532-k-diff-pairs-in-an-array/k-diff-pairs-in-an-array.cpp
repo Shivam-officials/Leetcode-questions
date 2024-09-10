@@ -3,23 +3,35 @@ class Solution
     public:
         int findPairs(vector<int> &nums, int k)
         {
-            int count = 0;
             set<set < int>> setOfSets;
-            for (int i = 0; i < nums.size(); i++)
+            int low = 0;
+            sort(nums.begin(), nums.end());
+            int high = low + 1;
+            while (high <= nums.size() - 1)
             {
-                for (int j = i + 1; j < nums.size(); j++)
-                {
-                    auto diff = nums[i] - nums[j];
-                    if ((abs(diff) == k) && (setOfSets.find({ nums[i],
-                            nums[j] }) == setOfSets.end()))
-                    {
-                        count++;
+                int diff = nums[low] - nums[high];
+                int absDiff = abs(diff);
 
-                        setOfSets.insert({ nums[i],
-                            nums[j] });
-                    }
+                if (k == absDiff && setOfSets.find({ nums[low],
+                        nums[high] }) == setOfSets.end())
+                {
+                    setOfSets.insert({ nums[low],
+                        nums[high] });
+                    low++;
+                    high++;
                 }
+                else if (absDiff > k)
+                {
+                    low++;
+                }
+                else
+                {
+                    high++;
+                }
+
+                if(low==high) high++;
             }
+
             return setOfSets.size();
         }
 };
