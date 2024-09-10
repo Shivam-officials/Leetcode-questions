@@ -12,8 +12,7 @@ class Solution
                 int diff = nums[low] - nums[high];
                 int absDiff = abs(diff);
 
-                if (k == absDiff && setOfSets.find({ nums[low],
-                        nums[high] }) == setOfSets.end())
+                if (k == absDiff)
                 {
                     setOfSets.insert({ nums[low],
                         nums[high] });
