@@ -3,7 +3,7 @@ class Solution
     public:
         int findPairs(vector<int> &nums, int k)
         {
-            set<set < int>> setOfSets;
+            set<pair<int,int>> setOfSets;
             int low = 0;
             sort(nums.begin(), nums.end());
             int high = low + 1;
