@@ -1,35 +1,46 @@
 class Solution
 {
     public:
-        int findPairs(vector<int> &nums, int k)
-        {
-            set<pair<int, int>> setOfSets;
-            int low = 0;
-            sort(nums.begin(), nums.end());
-            int high = low + 1;
-            while (high <= nums.size() - 1)
-            {
-                int diff = nums[high] - nums[low];
 
-                if (k == diff)
+        bool bsElementFound(vector<int> nums, int start, int target)
+        {
+            int end = nums.size() - 1;
+            if (target > nums[end])
+            {
+                return false;
+            }
+            int mid;
+            while (start <= end)
+            {
+                mid = start + (end - start) / 2;
+
+                if (nums[mid] == target)
                 {
-                    setOfSets.insert({ nums[low],
-                        nums[high] });
-                    low++;
-                    high++;
+                    return true;
                 }
-                else if (diff > k)
+                else if (nums[mid] > target)
                 {
-                    low++;
+                    end = mid - 1;
                 }
                 else
                 {
-                    high++;
+                    start = mid + 1;
                 }
-
-                if (low == high) high++;
             }
 
-            return setOfSets.size();
+            return false;
         }
+
+    int findPairs(vector<int> &nums, int k)
+    {
+        set<pair<int, int>> sets;
+        sort(nums.begin(), nums.end());
+        for (int i = 0; i < nums.size(); i++)
+        {
+            int elementToFind = nums[i] + k;
+            if (bsElementFound(nums, i + 1, elementToFind)) sets.insert({ nums[i],
+                elementToFind });
+        }
+        return sets.size();
+    }
 };
