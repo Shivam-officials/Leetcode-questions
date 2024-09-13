@@ -11,7 +11,7 @@ class Solution
 
            	// Set high to the found index, or the last element if x is greater than all elements
             int high = highIt > n - 1 ? n - 1 : highIt;
-            if (high == 0 && n != 1)
+            if (high == 0 )
             {
                 high++;
             }
