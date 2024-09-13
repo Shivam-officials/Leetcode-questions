@@ -26,7 +26,7 @@ class Solution
                 {
                     high++;	// If low is out of bounds, increase high
                 }
-                else if (high >= n)
+                else if (high == n)
                 {
                     low--;	// If high is out of bounds, decrease low
                 }
