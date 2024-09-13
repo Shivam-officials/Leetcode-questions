@@ -20,7 +20,7 @@ class Solution
             int low = high - 1;
 
            	// Expand the window from the middle until the window contains exactly k elements
-            while (k--)
+            while (high-low-1<k)
             {
                 if (low < 0)
                 {
