@@ -3,8 +3,8 @@ class Solution
 public:
     bool isPossibleSolution(vector<int>& bloomDay, int m, int k, int mid)
     {
-        int flowerCount = 0;
-        int bouquetCount = 0;
+        unsigned long long flowerCount = 0;
+        unsigned long long bouquetCount = 0;
 
         for (int i = 0; i < bloomDay.size(); i++)
         {
@@ -41,14 +41,14 @@ public:
             return -1;
         }
 
-        int start = *min_element(bloomDay.begin(), bloomDay.end());
-        int end = *max_element(bloomDay.begin(), bloomDay.end());
-        int ans = -1;
+        unsigned long long start = *min_element(bloomDay.begin(), bloomDay.end());
+        unsigned long long end = *max_element(bloomDay.begin(), bloomDay.end());
+        unsigned long long ans = -1;
 
         // Binary search for the minimum number of days
         while (start <= end)
         {
-            int mid = start + (end - start) / 2;  // Avoid potential overflow
+            unsigned long long mid = start + (end - start) / 2;  // Avoid potential overflow
 
             if (isPossibleSolution(bloomDay, m, k, mid))
             {
