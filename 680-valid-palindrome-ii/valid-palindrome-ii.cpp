@@ -2,25 +2,42 @@ class Solution
 {
     public:
 
-      bool isPalindrome(string s){
-        int l = 0, r = s.length()-1;
-        while(l<r){
-            if (s[l] != s[r]) return false;
-            l++;
-            r--;
-        }
-        return true;
-    }
-
-    bool validPalindrome(string s) {
-        int sum = 0, l = 0, r = s.length()-1;
-        while(l<r){
-            if (s[l] != s[r]){
-                return isPalindrome(s.substr(l, r-l)) || isPalindrome(s.substr(l+1, r-l));
+        bool palindromeOrNot(string s, int start, int end)
+        {
+            while (start < end)
+            {
+                if (s[start] == s[end])
+                {
+                    start++;
+                    end--;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            l++;
-            r--;
+            return true;
         }
-        return true;
+
+    bool validPalindrome(string s)
+    {
+        int start = 0;
+        int end = s.length() - 1;
+        bool ans = true;
+
+        while (start < end)
+        {
+            if (s[start] == s[end])
+            {
+                start++;
+                end--;
+            }
+            else
+            {
+                ans = palindromeOrNot(s, start, end - 1) || palindromeOrNot(s, start + 1, end);
+                break;
+            }
+        }
+        return ans;
     }
 };
