@@ -11,21 +11,22 @@ class Solution
     int findMinDifference(vector<string> &timePoints)
     {
         vector<int> minutes;
-        int minDiff = INT_MAX;
+
         for (auto time: timePoints)
         {
-            int timeInMinutes = hourToMinutes(time);
-
-            minutes.push_back(timeInMinutes);
+            int timeInMinute = hourToMinutes(time);
+            minutes.push_back(timeInMinute);
         }
 
         sort(minutes.begin(), minutes.end());
-
+        int minDiff = INT_MAX;
         for (int i = 0; i < minutes.size(); i++)
         {
-            int diff = (i == 0) ? ( minutes[0] + 1440 - minutes.back()) : (minutes[i] - minutes[i - 1]);
+            int diff = (i == 0) ? (1440 - minutes.back() + minutes[0]) : (minutes[i] - minutes[i - 1]);
+
             minDiff = min(minDiff, diff);
         }
+
         return minDiff;
     }
 };
