@@ -23,7 +23,7 @@ class Solution
 
         for (int i = 0; i < minutes.size(); i++)
         {
-            int diff = (i == 0) ? (1440 - minutes.back() + minutes[i]) : (minutes[i] - minutes[i - 1]);
+            int diff = (i == 0) ? ( minutes[0] + 1440 - minutes.back()) : (minutes[i] - minutes[i - 1]);
             minDiff = min(minDiff, diff);
         }
         return minDiff;
