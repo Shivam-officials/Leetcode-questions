@@ -1,48 +1,24 @@
-class Solution
-{
-    public:
-        bool matchingLastKElementCOrNot(string &s, char c, int k)
-        {
-            int lastIndex = s.length() - 1;
-            if (s.length() < k)
-                return false;
-            while (k--)
-            {
-                if (s[lastIndex] == c)
-                {
-                    lastIndex--;
-                }
-                else
-                {
-                    return false;
-                }
+class Solution {
+public:
+    string removeDuplicates(string s, int k) {
+        
+        int i=0, j = 0;
+        vector<int> count (s.length());
+        while (j<s.length()){
+            s[i] = s[j];
+            count[i] = 1;
+
+            if(i>0 && s[i] == s[i-1]){
+                count[i] += count[i-1];
             }
 
-            return true;
-        }
+            if(count[i]==k){
+                i -= k;
+            }
 
-    string removeDuplicates(string &s, int k)
-    {
-        string str = "";
-        int counter = k - 1;
-        for (int i = 0; i < s.length(); i++)
-        {
-            if (str.empty())
-            {
-                str.push_back(s[i]);
-            }
-            else if (matchingLastKElementCOrNot(str, s[i], k - 1))
-            {
-                for (int i = 0; i < k - 1; i++)
-                {
-                    str.pop_back();
-                }
-            }
-            else
-            {
-                str.push_back(s[i]);
-            }
+            i++;
+            j++;
         }
-        return str;
+        return s.substr(0,i);
     }
 };
