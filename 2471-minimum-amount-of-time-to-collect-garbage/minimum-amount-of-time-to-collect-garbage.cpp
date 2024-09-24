@@ -1,54 +1,70 @@
 class Solution
 {
     public:
-        int timeTakenForCurrentGarbageType(vector<string> &garbage, vector<int> &travel, char currentGarbageType)
-        {
-            int timeTakenForGarbageCollection = 0;
 
-            int distanceCovered = 0;
-            int distanceCoveredForCurrentGarbageType = 0;
+        int garbageCollection(vector<string> &garbage, vector<int> &travel)
+        {
+
+           	// picktimes
+            int pickTimeForP = 0;
+            int pickTimeForM = 0;
+            int pickTimeForG = 0;
+
+           	// lastStops
+            int lastStopForP = 0;
+            int lastStopForM = 0;
+            int lastStopForG = 0;
+
+           	// timeForDistanceCovering 
+            int timeForTruckP = 0;
+            int timeForTruckM = 0;
+            int timeForTruckG = 0;
 
             for (int i = 0; i < garbage.size(); i++)
             {
 
-                string houseGarbage = garbage[i];
+                string garbageInHouse = garbage[i];
 
-                int currentHouseGarbageCollectionTime = 0;
-
-               	// total distance covered till now 
-                if (i > 0)
+                for (auto garbageType: garbageInHouse)
                 {
-                    distanceCovered += travel[i - 1];
-                }
-
-               	// time taken for collecting garbage from house
-                for (auto garbageType: houseGarbage)
-                {
-                    if (garbageType == currentGarbageType)
+                    if (garbageType == 'M')
                     {
-                        currentHouseGarbageCollectionTime++;
+                        pickTimeForM++;
+                        lastStopForM = i;
+                    }
+                    else if (garbageType == 'G')
+                    {
+                        pickTimeForG++;
+                        lastStopForG = i;
+                    }
+                    else
+                    {
+                        pickTimeForP++;
+                        lastStopForP = i;
                     }
                 }
-
-                if (currentHouseGarbageCollectionTime > 0)
-                {
-                    timeTakenForGarbageCollection += currentHouseGarbageCollectionTime;
-                    distanceCoveredForCurrentGarbageType = distanceCovered;
-                }
             }
-            return distanceCoveredForCurrentGarbageType + timeTakenForGarbageCollection;
+
+           	// calculating the time cost for every truck
+
+           	// truck p
+            for (int i = 0; i < lastStopForP; i++)
+            {
+                timeForTruckP += travel[i];
+            }
+
+           	// truck p
+            for (int i = 0; i < lastStopForM; i++)
+            {
+                timeForTruckM += travel[i];
+            }
+
+           	// truck p
+            for (int i = 0; i < lastStopForG; i++)
+            {
+                timeForTruckG += travel[i];
+            }
+
+            return timeForTruckG + timeForTruckM + timeForTruckP + pickTimeForG + pickTimeForM + pickTimeForP;
         }
-
-    int garbageCollection(vector<string> &garbage, vector<int> &travel)
-    {
-
-        string garbageType = "MPG";
-
-        int ans = 0;
-        for (auto currentGarbageType: garbageType)
-        {
-            ans += timeTakenForCurrentGarbageType(garbage, travel, currentGarbageType);
-        }
-        return ans;
-    }
 };
