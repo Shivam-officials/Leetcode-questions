@@ -5,12 +5,7 @@ class Solution
         int garbageCollection(vector<string> &garbage, vector<int> &travel)
         {
 
-           	// picktimes
-            int pickTimeForP = 0;
-            int pickTimeForM = 0;
-            int pickTimeForG = 0;
-
-           	// lastStops
+           	//last spot
             int lastStopForP = 0;
             int lastStopForM = 0;
             int lastStopForG = 0;
@@ -20,28 +15,23 @@ class Solution
             int timeForTruckM = 0;
             int timeForTruckG = 0;
 
+            int timeTakenForPickup = 0;
             for (int i = 0; i < garbage.size(); i++)
             {
+                string currentHouseGarbage = garbage[i];
+                timeTakenForPickup += currentHouseGarbage.length();
 
-                string garbageInHouse = garbage[i];
-
-                for (auto garbageType: garbageInHouse)
+                if (currentHouseGarbage.find('P') != string::npos)
                 {
-                    if (garbageType == 'M')
-                    {
-                        pickTimeForM++;
-                        lastStopForM = i;
-                    }
-                    else if (garbageType == 'G')
-                    {
-                        pickTimeForG++;
-                        lastStopForG = i;
-                    }
-                    else
-                    {
-                        pickTimeForP++;
-                        lastStopForP = i;
-                    }
+                    lastStopForP = i;
+                }
+                if (currentHouseGarbage.find('M') != string::npos)
+                {
+                    lastStopForM = i;
+                }
+                if (currentHouseGarbage.find('G') != string::npos)
+                {
+                    lastStopForG = i;
                 }
             }
 
@@ -65,6 +55,6 @@ class Solution
                 timeForTruckG += travel[i];
             }
 
-            return timeForTruckG + timeForTruckM + timeForTruckP + pickTimeForG + pickTimeForM + pickTimeForP;
+            return timeTakenForPickup + timeForTruckM + timeForTruckG + timeForTruckP;
         }
 };
