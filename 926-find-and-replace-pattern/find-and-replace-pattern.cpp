@@ -1,7 +1,7 @@
 class Solution
 {
     public:
-        string normalise(string word)
+        void normalise(string & word)
         {
             char start = 'a';
             unordered_map<char, char> mapping;
@@ -20,8 +20,6 @@ class Solution
             {
                 ch = mapping[ch];
             }
-
-            return word;
         }
 
     vector<string> findAndReplacePattern(vector<string> &words, string pattern)
@@ -29,15 +27,18 @@ class Solution
 
         vector<string> ans;
 
-        pattern = normalise(pattern);
+       	// normalise the pattern 
+        normalise(pattern);
 
+       	// normalise every current element and if it matches with the normalised pattern add the before normalised current element in the ans vector
         for (auto str: words)
         {
-            string currentNormaliseWord = normalise(str);
+            string currentWord = str;
+            normalise(str);
 
-            if (currentNormaliseWord.compare(pattern) == 0)
+            if (str.compare(pattern) == 0)
             {
-                ans.push_back(str);
+                ans.push_back(currentWord);
             }
         }
 
