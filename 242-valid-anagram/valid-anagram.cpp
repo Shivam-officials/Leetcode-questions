@@ -13,10 +13,10 @@ for (auto ch : s) {
 }
 
 for (auto ch : t) {
-    if(freq[ch]==0)
-    {
-        return false;
-    }
+    // if(freq[ch]==0)
+    // {
+    //     return false;
+    // }
     
     freq[ch]--;
 }
