@@ -7,16 +7,14 @@ public:
         int low= 0;
         int high = s.length()-1;
         while(low<high){
-            while(!isThisALetter(s[low]) && low<high) {
-low++;
-            } 
-
-             while(!isThisALetter(s[high] ) && low<high) {
-                high--;
-             }
-            swap(s[low],s[high]);
-            low++;
+            if(isThisALetter(s[low]) && isThisALetter(s[high])){
+                swap(s[low],s[high]);
+                low++;
             high--;
+            }else if(!isThisALetter(s[low])) low++;
+            else high--;
+
+            
         }
         return s;
     }
