@@ -6,7 +6,7 @@ public:
     
 
 vector<int> freq(256,0);
-bool ans;
+
 
 for (auto ch : s) {
     freq[ch]++;
