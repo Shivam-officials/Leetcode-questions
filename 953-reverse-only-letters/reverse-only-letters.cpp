@@ -12,7 +12,7 @@ public:
                 low++;
             high--;
             }else if(!isThisALetter(s[low])) low++;
-            else if(!isThisALetter(s[high])) high--;
+            else high--;
 
             
         }
