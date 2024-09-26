@@ -2,11 +2,11 @@ class Solution
 {
     public:
 
-        bool isThisAVowel(char ch)
+        bool isThisAVowel(char c)
         {
            	// Checks if the character is an vowel (both uppercase and lowercase)
             
-            return ( ch == 'a' ||  ch == 'A' ||  ch == 'e' ||  ch == 'E' ||  ch == 'i' ||  ch == 'I' ||  ch == 'o' ||  ch == 'O' ||  ch == 'u' ||  ch == 'U');
+            return (c == 'a' ||c == 'e' ||c == 'i' ||c == 'o' ||c == 'u' ||c == 'A' ||c == 'E' ||c == 'I' ||c == 'O' ||c == 'U');
         }
     string reverseVowels(string s)
     {
