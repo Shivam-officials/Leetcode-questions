@@ -5,8 +5,8 @@ class Solution
         bool isThisAVowel(char ch)
         {
            	// Checks if the character is an vowel (both uppercase and lowercase)
-            string vowel = "AEIOUaeiou";
-            return binary_search(vowel.begin(), vowel.end(), ch);
+            
+            return ( ch == 'a' ||  ch == 'A' ||  ch == 'e' ||  ch == 'E' ||  ch == 'i' ||  ch == 'I' ||  ch == 'o' ||  ch == 'O' ||  ch == 'u' ||  ch == 'U');
         }
     string reverseVowels(string s)
     {
