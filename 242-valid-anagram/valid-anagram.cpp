@@ -5,23 +5,23 @@ public:
     bool isAnagram(string s , string t) {
     
 
-vector<int> freq(256,0);
+int freqTable[256] = {0};
 
 
 for (auto ch : s) {
-    freq[ch]++;
+    freqTable[ch]++;
 }
 
 for (auto ch : t) {
-    // if(freq[ch]==0)
-    // {
-    //     return false;
-    // }
+    if(freqTable[ch]==0)
+    {
+        return false;
+    }
     
-    freq[ch]--;
+    freqTable[ch]--;
 }
 
-for (auto elm : freq) {
+for (auto elm : freqTable) {
     if (elm !=0) {
      return false;
     }
