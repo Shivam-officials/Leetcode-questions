@@ -2,14 +2,33 @@ class Solution {
 public:
 
     
-    bool isAnagram(string s, string t) {
-        if(s.length()!=t.length()) return false;
-        sort(s.begin(),s.end());
-        sort(t.begin(),t.end());
+    bool isAnagram(string s , string t) {
+    
 
-        for(int i = 0; i< s.length();i++){
-            if(s[i]!=t[i]) return false;
-        }
-        return true;
+vector<int> freq(256,0);
+bool ans;
+
+for (auto ch : s) {
+    freq[ch]++;
+}
+
+for (auto ch : t) {
+    if(freq[ch]==0)
+    {
+        return false;
+    }
+    
+    freq[ch]--;
+}
+
+for (auto elm : freq) {
+    if (elm !=0) {
+     return false;
+    }
+}
+
+ return true;   
+
+
     }
 };
