@@ -3,47 +3,42 @@ class Solution
     public:
         string reorganizeString(string s)
         {
-            unordered_map<char, int> count;
-           	// find the most occusring element
-            int maxOccuringElementCount = INT_MIN;
+            int countOccurance[26] = { 0 };
             char maxOccuringElement;
+            int maxOccuringElementCount = INT_MIN;
+           	// find the most occuring element
             for (auto ch: s)
             {
-                count[ch]++;
-                if (maxOccuringElementCount < count[ch])
+                countOccurance[ch - 'a']++;
+                if (maxOccuringElementCount < countOccurance[ch - 'a'])
                 {
-                    maxOccuringElementCount = count[ch];
                     maxOccuringElement = ch;
+                    maxOccuringElementCount = countOccurance[ch - 'a'];
                 }
             }
 
-           	// place the most occuring element
+           	// place the most occuring element at adjacent places
             int index = 0;
-            while (count[maxOccuringElement]--)
+            while (countOccurance[maxOccuringElement - 'a']--)
             {
-                if (index >= s.length())
-                {
-                    return "";
-                }
-
+                if (index >= s.length()) return "";
                 s[index] = maxOccuringElement;
                 index += 2;
             }
 
-            count[maxOccuringElement] = 0;
-           	// place the rest
-            for (auto &occurance: count)
-            {
-                while (occurance.second--)
-                {
-                   	// cout << occurance.second<<endl;
-                    index = index >= s.length() ? 1 : index;
+            countOccurance[maxOccuringElement - 'a'] = 0;	// making it zero making it will -1 after the previous loop and when we will start replacing the rest of the character we will come accross it too and if it is -1 then our conditions make it go into infinite loop
 
-                    s[index] = occurance.first;
+           	// place the rest
+            for (int i = 0; i < 26; i++)
+            {
+
+                while (countOccurance[i]--)
+                {
+                    index = index >= s.length() ? 1 : index;
+                    s[index] = i + 'a';
                     index += 2;
                 }
             }
-           	// cout << s;
             return s;
         }
 };
