@@ -19,7 +19,7 @@ public:
     }
 
     bool isIsomorphic(string s, string t) {
-        if(s.length()!= t.length()) return false;
+        // if(s.length()!= t.length()) return false;
         normalise(s);
         normalise(t);
         if(s.compare(t)==0){
