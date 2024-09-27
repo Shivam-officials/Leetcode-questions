@@ -13,7 +13,7 @@ public:
     else {
       m1[s[i]] = i + 1;
       m2[t[i]] = i + 1;
-      cout<<m1[s[i]]<<" "<<m2[t[i]]<<endl;
+    //   cout<<m1[s[i]]<<" "<<m2[t[i]]<<endl;
     }
   }
 
