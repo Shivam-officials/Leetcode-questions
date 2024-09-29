@@ -1,6 +1,6 @@
 class Solution {
 public:
-    string palindromeAroundIt(string s, int low, int high){
+    string palindromeAroundIt(string &s, int low, int high){
         while(low>=0 && high < s.length() && s[low]== s[high]){
             low--;
             high++;
@@ -10,7 +10,7 @@ public:
     string longestPalindrome(string s) {
 
         string longest = "";
-        
+
         for(int i = 0; i< s.length();i++){
 
             string oddLengthLongestPalindrome = palindromeAroundIt(s,i,i);
