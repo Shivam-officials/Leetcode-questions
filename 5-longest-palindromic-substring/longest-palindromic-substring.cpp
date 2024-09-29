@@ -8,8 +8,11 @@ public:
         return s.substr(low+1,high-low-1);
     }
     string longestPalindrome(string s) {
+
         string longest = "";
+        
         for(int i = 0; i< s.length();i++){
+
             string oddLengthLongestPalindrome = palindromeAroundIt(s,i,i);
             string evenLengthLongestPalindrome = palindromeAroundIt(s,i,i+1);
 
