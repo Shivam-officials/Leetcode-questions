@@ -4,38 +4,51 @@ class Solution
 
         int myAtoi(string s)
         {
-            int num = 0, i = 0, sign = 1;	// Initialize variables: number, index, and sign (default +1 for positive)
+            int number = 0;
+            int sign = 1;
+            bool numStarted = false;	// Flag to check when to start processing digits
 
-           	// Skip leading whitespace
-            while (s[i] == ' ')
+            for (auto ch: s)
             {
-                i++;
-            }
-
-           	// Check for sign characters '+' or '-'
-            if (i < s.size() && (s[i] == '-' || s[i] == '+'))
-            {
-                sign = (s[i] == '-') ? -1 : 1;
-                i++;
-            }
-
-           	// Process each digit in the string
-            while (i < s.size() && isdigit(s[i]))
-            {
-                int digit = s[i] - '0';	// Convert char to digit
-
-               	// Overflow check: Ensure that num *10 + digit does not overflow
-                if (num > (INT_MAX - digit) / 10)
+               	// Skip leading spaces
+                if (ch == ' ' && !numStarted)
                 {
-                    return (sign == 1) ? INT_MAX : INT_MIN;	// Return INT_MAX or INT_MIN depending on the sign
+                    continue;
+                }
+
+               	// Handle sign if it's the first non-space character
+                if (ch == '-' && !numStarted)
+                {
+                    sign = -1;
+                    numStarted = true;	// Mark that we've started processing
+                    continue;
+                }
+                else if (ch == '+' && !numStarted)
+                {
+                    numStarted = true;
+                    continue;
+                }
+
+               	// Stop if non-digit characters are found (including alphabets and '.')
+                if (ch<'0' || ch > '9')
+                {
+                    break;
+                }
+
+               	// Convert char to digit
+                int digit = ch - '0';
+
+               	// Overflow check before processing the next digit
+                if (number > (INT_MAX - digit) / 10)
+                {
+                    return sign == 1 ? INT_MAX : INT_MIN;
                 }
 
                	// Accumulate the digit into the number
-                num = num *10 + digit;
-                i++;
+                number = number *10 + digit;
+                numStarted = true;	// Mark that we've started processing
             }
 
-           	// Return the final number multiplied by its sign
-            return num * sign;
+            return sign * number;
         }
 };
