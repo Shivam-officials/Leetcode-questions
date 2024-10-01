@@ -3,49 +3,27 @@ class Solution
     public:
         int compress(vector<char> &chars)
         {
-            int adjacentCount = 1;	// Tracks the number of consecutive identical characters
-            int index = 0;	// Index to place the compressed characters in the original array
-
-           	// Iterate through the array, except for the last character
-            for (int i = 0; i < chars.size() - 1; i++)
+            int index = 0;
+            for (int i = 0; i < chars.size();)
             {
-               	// If the current character matches the next one, increment adjacentCount
-                if (chars[i] == chars[i + 1])
+                char letter = chars[i];
+                int count = 0;
+                while (i < chars.size() && chars[i] == letter)
                 {
-                    adjacentCount++;
-                    continue;	// Continue without processing until a different character is found
+                    count++;
+                    i++;
                 }
 
-               	// Add the current character to the compressed position in the array
-                chars[index++] = chars[i];
-
-               	// If the adjacentCount is more than 1, add the count as well
-                if (adjacentCount > 1)
+                chars[index++] = letter;
+                if (count > 1)
                 {
-                   	// Convert the count to string and append each digit to the array
-                    for (auto ch: to_string(adjacentCount))
+                    for (auto ch: to_string(count))
                     {
                         chars[index++] = ch;
                     }
                 }
-
-               	// Reset adjacentCount for the next group of characters
-                adjacentCount = 1;
             }
 
-           	// Add the last character (since the loop doesn't include the last one)
-            chars[index++] = chars[chars.size() - 1];
-
-           	// Append the count for the last character group if greater than 1
-            if (adjacentCount > 1)
-            {
-                for (auto ch: to_string(adjacentCount))
-                {
-                    chars[index++] = ch;
-                }
-            }
-
-           	// Return the new size of the compressed array
-            return index;
+            return index;	// bcz index already will increased +1 due to ++ operator so it will be equal to the size of the compressod string 
         }
 };
