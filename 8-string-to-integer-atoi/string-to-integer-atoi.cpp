@@ -28,8 +28,10 @@ class Solution
             num = (num * 10) + digit;
             i++;
            }
-           
+
             return sign * num;
+
+        
 
         }
 };
