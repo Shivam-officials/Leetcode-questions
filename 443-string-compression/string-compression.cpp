@@ -3,41 +3,46 @@ class Solution
     public:
         int compress(vector<char> &chars)
         {
-            int adjacentCount = 1;	// Tracks consecutive character count
-            int index = 0;
+            int adjacentCount = 1;	// Tracks the number of consecutive identical characters
+            int index = 0;	// Index to place the compressed characters in the original array
+
+           	// Iterate through the array, except for the last character
             for (int i = 0; i < chars.size() - 1; i++)
             {
-               	// If the current and next characters are the same, increase count
+               	// If the current character matches the next one, increment adjacentCount
                 if (chars[i] == chars[i + 1])
                 {
                     adjacentCount++;
-                    continue;	// Skip further processing until a different char is found
+                    continue;	// Continue without processing until a different character is found
                 }
 
-                chars[index++] = chars[i];	// Add character directly 
+               	// Add the current character to the compressed position in the array
+                chars[index++] = chars[i];
 
-                string adjacentCountString = to_string(adjacentCount);
-
-                int j = 0;
-               	// Append the count of the last group if > 1
-                while (adjacentCount > 1 && j < adjacentCountString.length())
+               	// If the adjacentCount is more than 1, add the count as well
+                if (adjacentCount > 1)
                 {
-                    chars[index++] = (adjacentCountString[j++]);
+                   	// Convert the count to string and append each digit to the array
+                    for (auto ch: to_string(adjacentCount))
+                    {
+                        chars[index++] = ch;
+                    }
                 }
 
-               	// Reset count for the next group
-                adjacentCount = i != chars.size() - 1 ? 1 : adjacentCount;
+               	// Reset adjacentCount for the next group of characters
+                adjacentCount = 1;
             }
 
-           	// Process the last character and its count
-            chars[index++] = (chars[chars.size() - 1]);
-            string adjacentCountString = to_string(adjacentCount);
+           	// Add the last character (since the loop doesn't include the last one)
+            chars[index++] = chars[chars.size() - 1];
 
-            int j = 0;
-           	// Append the count of the last group if > 1
-            while (adjacentCount > 1 && j < adjacentCountString.length())
+           	// Append the count for the last character group if greater than 1
+            if (adjacentCount > 1)
             {
-                chars[index++] = (adjacentCountString[j++]);
+                for (auto ch: to_string(adjacentCount))
+                {
+                    chars[index++] = ch;
+                }
             }
 
            	// Return the new size of the compressed array
