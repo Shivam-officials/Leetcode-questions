@@ -3,51 +3,44 @@ class Solution
     public:
         int compress(vector<char> &chars)
         {
-            int adjacentCount = 1;
-           
-            vector<char> ans;
+            int adjacentCount = 1;	// Tracks consecutive character count
+            int index = 0;
             for (int i = 0; i < chars.size() - 1; i++)
             {
+               	// If the current and next characters are the same, increase count
                 if (chars[i] == chars[i + 1])
                 {
                     adjacentCount++;
-
-                    continue;
+                    continue;	// Skip further processing until a different char is found
                 }
 
-                string currentGp = "";
-                if (adjacentCount == 1)
+                chars[index++] = chars[i];	// Add character directly 
+
+                string adjacentCountString = to_string(adjacentCount);
+
+                int j = 0;
+               	// Append the count of the last group if > 1
+                while (adjacentCount > 1 && j < adjacentCountString.length())
                 {
-                    currentGp.push_back(chars[i]);
-                }
-                else if (adjacentCount > 1)
-                {
-                    currentGp.push_back(chars[i]);
-                    currentGp.append(to_string(adjacentCount));
+                    chars[index++] = (adjacentCountString[j++]);
                 }
 
-                for (auto ch: currentGp)
-                {
-                    ans.push_back(ch);
-                }
+               	// Reset count for the next group
                 adjacentCount = i != chars.size() - 1 ? 1 : adjacentCount;
             }
 
-            ans.push_back(chars[chars.size() - 1]);
+           	// Process the last character and its count
+            chars[index++] = (chars[chars.size() - 1]);
             string adjacentCountString = to_string(adjacentCount);
+
             int j = 0;
-            while (adjacentCount>1 &&j < adjacentCountString.length())
+           	// Append the count of the last group if > 1
+            while (adjacentCount > 1 && j < adjacentCountString.length())
             {
-                ans.push_back(adjacentCountString[j++]);
+                chars[index++] = (adjacentCountString[j++]);
             }
 
-           	// cout<<"ans is" <<endl;
-            for (auto ch: ans)
-            {
-                cout << ch;
-            }
-           	// cout << "ans finished"<<endl;
-            chars.swap(ans);
-            return chars.size();
+           	// Return the new size of the compressed array
+            return index;
         }
 };
