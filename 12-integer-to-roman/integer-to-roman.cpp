@@ -3,43 +3,61 @@ class Solution
     public:
         string intToRoman(int num)
         {
-            string ths[4] = { "",
-                "M",
-                "MM",
-                "MMM" };
-            string hens[11] = { "",
-                "C",
-                "CC",
-                "CCC",
-                "CD",
-                "D",
-                "DC",
-                "DCC",
-                "DCCC",
-                "CM",
-                "M" };
-            string tens[11] = { "",
-                "X",
-                "XX",
-                "XXX",
-                "XL",
-                "L",
-                "LX",
-                "LXX",
-                "LXXX",
-                "XC",
-                "C" };
-            string ones[11] = { "",
-                "I",
-                "II",
-                "III",
-                "IV",
-                "V",
-                "VI",
-                "VII",
-                "VIII",
-                "IX",
-                "X" };
-            return ths[num / 1000] + hens[(num % 1000) / 100] + tens[(num % 100) / 10] + ones[num % 10];
+        	// Define pairs of integer values and their corresponding Roman numeral representations
+            vector<pair<int, string>> values = {
+		{
+                    1000,
+                    "M" },
+                {
+                    900,
+                    "CM" },
+                {
+                    500,
+                    "D" },
+                {
+                    400,
+                    "CD" },
+                {
+                    100,
+                    "C" },
+                {
+                    90,
+                    "XC" },
+                {
+                    50,
+                    "L" },
+                {
+                    40,
+                    "XL" },
+                {
+                    10,
+                    "X" },
+                {
+                    9,
+                    "IX" },
+                {
+                    5,
+                    "V" },
+                {
+                    4,
+                    "IV" },
+                {
+                    1,
+                    "I" }
+            };
+
+            string result;
+
+           	// Loop through the values array and construct the Roman numeral string
+            for (const auto &romanMap: values)
+            {
+                while (num >= romanMap.first)
+                {
+                    result += romanMap.second;	// Append the Roman numeral to the result
+                    num -= romanMap.first;	// Subtract the value from num
+                }
+            }
+
+            return result;	// Return the constructed Roman numeral string
         }
 };
