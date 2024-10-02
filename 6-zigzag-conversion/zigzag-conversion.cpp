@@ -3,14 +3,11 @@ class Solution
     public:
         string convert(string s, int numRows)
         {
-             if (numRows == 1) return s;
-            vector<string> zigzag
-            {
-                (size_t) numRows, "" };
+            if (numRows == 1) return s;
+            
+            vector<string> zigzag( numRows);
 
             string ans = "";
-
-           
 
             int i = 0;
             bool direction = 1;
