@@ -3,27 +3,32 @@ class Solution
     public:
         string largestNumber(vector<int> &nums)
         {
+           	// Convert integers to strings
             vector<string> numString;
 
-            for (auto elm: nums)
-            {
-                numString.push_back(to_string(elm));
-            }
-           	// cout <<  largestNumber(nums);
+           	// Reserve space to avoid multiple reallocations for efficiency
+            numString.reserve(nums.size());
 
-            sort(numString.begin(), numString.end(), [](string a, string b)->bool
+           	// Convert each integer in the input vector 'nums' to a string and store it in 'numString'
+            for (int num: nums)
             {
-               	// return a>b;
-                string t1 = a + b;
-                string t2 = b + a;
-                return t1 > t2;
+                numString.push_back(to_string(num));
+            }
+
+           	// Sort the strings using a custom comparator that compares concatenated results
+           	// For example, for "9" and "34", compare "934" vs "349" and sort accordingly
+            sort(numString.begin(), numString.end(), [](const string &a, const string &b)
+            {
+                return a + b > b + a;
 	});
-            if(numString[0]=="0") return "0";
 
-            string str ="";
-            for(auto elm:numString){
-                str += elm;
-            }
-            return str;
+           	// If the largest number after sorting is "0", that means all numbers were zero
+           	// Hence, return "0" to handle the edge case of all zeros
+            if (numString[0] == "0")
+                return "0";
+
+           	// Use the 'accumulate' function to concatenate all sorted strings into one large string
+           	// Start with an empty string as the initial value
+            return accumulate(numString.begin(), numString.end(), string());
         }
 };
