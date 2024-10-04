@@ -1,23 +1,25 @@
 class Solution {
 public:
     int beautySum(string s) {
-        int beurtySum = 0;
+      int beutySum = 0;
   for (int i = 0; i < s.length(); i++) {
-    unordered_map<char, int> mp;
+    int hash[256] = {0};
     for (int j = i; j < s.length(); j++) {
-      mp[s[j]]++;
+      hash[s[j]]++;
 
       int mini = INT_MAX;
       int maxi = INT_MIN;
 
-      for (auto entry : mp) {
-        mini = min(mini, entry.second);
-        maxi = max(maxi, entry.second);
+      for (auto count : hash) {
+        if (count > 0) {
+          maxi = max(maxi, count);
+          mini = min(mini, count);
+        }
       }
 
-      beurtySum += maxi - mini;
+      beutySum += maxi - mini;
     }
   }
-  return beurtySum;
+  return beutySum;
     }
 };
