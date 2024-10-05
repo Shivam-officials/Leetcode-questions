@@ -9,6 +9,10 @@ public:
       i++;
     }
 
+    if (i==s.length()) {
+    break;
+    }
+
     // in place the word and reverse it again to get a proper word
     while (i < s.length() && s[i] != ' ') {
       s[end++] = s[i++];
@@ -16,11 +20,8 @@ public:
 
     reverse(s.begin() + start, s.begin() + end);
 
-    if(s[end-1]!=' ') s[end++] = ' ';
-
-    // if (i == s.length()) break;
+    s[end++] = ' ';
     
-
     start = end;
 
   }
