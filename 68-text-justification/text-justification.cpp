@@ -1,89 +1,78 @@
 class Solution {
 public:
     vector<string> fullJustify(vector<string>& words, int maxWidth) {
-         vector<string> currentLine;
-  int totalNosOfChars = 0, totalNoOfSpaces = 0;
+ vector<string>ans;
+  vector<string>currentLine;
+  int totalNumberOfCharsInCurrentline = 0;
+  for (auto currentWord : words) {
 
-  vector<string> ans;
-  if(words.size()==1){
-    int spacesToAdd = maxWidth-words[0].size();
-    while(spacesToAdd--) words[0] += " ";
-    return words;
+    int currentNeededNumberOfSpaces = currentLine.size();
+
+    if (totalNumberOfCharsInCurrentline + currentNeededNumberOfSpaces + currentWord.length() > maxWidth) {
+      
+      int totalSpacesLeft = maxWidth-totalNumberOfCharsInCurrentline;
+      int evenSpaces = totalSpacesLeft/max(1,(int)currentLine.size()-1);
+      int oddSpaces = totalSpacesLeft%max(1,(int)currentLine.size()-1);
+
+      // adding the spaces for justification
+
+      for (int i = 0; i< currentLine.size()-1; i++) {
+
+      string &currentLineWords = currentLine[i];
+
+       for (int j = 0; j<evenSpaces; j++) {
+        currentLineWords+= " ";
+       }
+       
+       if(oddSpaces>0)
+       {
+        currentLineWords+=" ";
+        oddSpaces--;
+       }
+       
+      }
+
+      // when only element is there in currentline
+      if(currentLine.size()==1)
+      {
+        while (totalSpacesLeft--) {
+         currentLine[0] += " ";
+        }
+      }
+       
+       // after making the string justified in the vector store it in the string and push to ans
+       string justifiedString = accumulate(currentLine.begin(),currentLine.end(),string());
+       ans.push_back(justifiedString);
+
+      // reset the values for next line
+      currentLine.clear();
+      totalNumberOfCharsInCurrentline = 0;
+
+    }
+   
+      // push the current word into current line and increase it totalChars 
+      currentLine.push_back(currentWord);
+      totalNumberOfCharsInCurrentline += currentWord.length();  
+    
+    
   }
-  //  for (int i = 0; i<words.size();) {
-  int i = 0;
-  while (i < words.size()) {
-    // add the strings into current untill it can have maximum of words with one
-    // space minimum them
-    while (i<words.size() && totalNoOfSpaces + totalNosOfChars + words[i].length() <= maxWidth) {
-      currentLine.push_back(words[i]);
-      totalNosOfChars += words[i].length();
-      totalNoOfSpaces = currentLine.size();
-      i++;
+
+  // handling last line bcz that line will never be crossing the maxwidth thats why its a last line and we have to make it left justified
+    string leftJustifiedString = "";
+    for (auto word : currentLine) {
+      leftJustifiedString += word + " ";
     }
 
-    // calulating the spaces to insert
-    int spacesToAddLeft = maxWidth - totalNosOfChars;
+    // last word does not need extraspace
+    leftJustifiedString.pop_back();
 
-    if (i<words.size() && currentLine.size() > 1) {
-      int evenlySpacesToAdd = spacesToAddLeft / (currentLine.size() - 1);
-      int oddSpacesToAdd = spacesToAddLeft % (currentLine.size() - 1);
-
-      // inserting spaces evenly
-      for (int j = 0; j < currentLine.size() - 1; j++) {
-        string &currentWord = currentLine[j];
-        for (int j = 0; j < evenlySpacesToAdd; j++) {
-          currentWord += " ";
-        }
-      }
-
-      // add odd spaces
-      int oddSpacesIndex = 0;
-      while (oddSpacesToAdd--) {
-        currentLine[oddSpacesIndex++] += " ";
-      }
-    } else if(currentLine.size() == 1)     // when the current line has only one word in the line
-    {
-      // add spaces to the right
-      int leftSpaccesToAdd = maxWidth - totalNosOfChars, indexForSpace = 0;
-      while (leftSpaccesToAdd--) {
-        currentLine[indexForSpace] += " ";
-      }
-    } else 
-    {
-        int totalNoOFcharsInLastLine = 0;
-        for (int j = 0; j<currentLine.size()-1; j++) {
-            currentLine[j] += " ";
-            totalNoOFcharsInLastLine += currentLine[j].length();
-        }
-        totalNoOFcharsInLastLine+= currentLine.back().length();
-
-        int spacesLeftToAdd = maxWidth - totalNoOFcharsInLastLine;
-        while(spacesLeftToAdd--)
-        {
-            currentLine.back() += " ";
-        }
-
+    int spacesToAddForLeftJustification = maxWidth - leftJustifiedString.size();
+    while (spacesToAddForLeftJustification--) {
+      leftJustifiedString += " ";
     }
 
-    // putting the currenline strings into ans
-    string ansString = "";
-    for (auto entry : currentLine) {
-      ansString += entry;
-    }
-    ans.push_back(ansString);
+    ans.push_back(leftJustifiedString);
 
-    // clearing the data for next round
-    currentLine.clear();
-    totalNoOfSpaces = 0;
-    totalNosOfChars = 0;
-    // cout << "i is at"<<i<<endl;
-    // cout << ans.back()<<endl;
-    // break;
-  }
-  //    for (auto word : ans) {
-  //    cout << word<<endl;
-  //    }
-  return ans;
+    return ans;
     }
 };
