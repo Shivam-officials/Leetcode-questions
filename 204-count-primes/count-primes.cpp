@@ -11,7 +11,7 @@ public:
 
      for (int i = 2; i < n; i++) {
         if(prime[i]) {
-            // ans++;
+            ans++;
         
         int j = i*2;
         while(j<n)
@@ -23,15 +23,7 @@ public:
      }
      }
 
-    // int ans =0;
-     for(int i = 0; i < n; i++)
-     {
-        if(prime[i]==true)
-        {
-            ans++;
-        }
-        
-     }
+   
 
      return ans;
     }
