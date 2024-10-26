@@ -1,7 +1,7 @@
 class Solution {
 public:
 
-    void addStringRecursion(string &str1,string &str2,int carry,int index, string &ans){
+    void addStringRecursion(string str1,string str2,int carry,int index, string &ans){
     int l1 = str1.size()-1;
     int l2 = str2.size()-1;
     // base case
