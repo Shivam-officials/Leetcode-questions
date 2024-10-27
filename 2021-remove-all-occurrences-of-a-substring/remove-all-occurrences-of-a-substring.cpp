@@ -3,17 +3,20 @@ class Solution
     public:
         void removeOccurrencesRe(string &str, string &part)
         {
-           	// base case
-            if (str.find(part) == string::npos) return;
-
-           	// 1 case hum krenge 
             int index = str.find(part);
+
+           	// base case
+            if (index == string::npos) return;
+
+            // 1 case hamra
             str.erase(index, part.length());
 
+            //baki recursion ka
             removeOccurrencesRe(str, part);
         }
-    string removeOccurrences(string str, string part) {
-        removeOccurrencesRe(str,part);
+    string removeOccurrences(string str, string part)
+    {
+        removeOccurrencesRe(str, part);
         return str;
     }
 };
