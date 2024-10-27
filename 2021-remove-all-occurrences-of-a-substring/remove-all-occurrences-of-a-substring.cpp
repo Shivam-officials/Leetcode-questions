@@ -1,14 +1,19 @@
 class Solution
 {
     public:
-        string removeOccurrences(string str, string part)
+        void removeOccurrencesRe(string &str, string &part)
         {
-            while (str.find(part) != string::npos)
-            {
-                int index = str.find(part);
-                str.erase(index, part.length());
-            }
+           	// base case
+            if (str.find(part) == string::npos) return;
 
-            return str;
+           	// 1 case hum krenge 
+            int index = str.find(part);
+            str.erase(index, part.length());
+
+            removeOccurrencesRe(str, part);
         }
+    string removeOccurrences(string str, string part) {
+        removeOccurrencesRe(str,part);
+        return str;
+    }
 };
