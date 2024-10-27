@@ -19,7 +19,9 @@ class Solution
         }
     string removeOccurrences(string str, string part)
     {
-        removeOccurrencesRe(str, part);
+        while(str.find(part)!=string::npos){
+            str.erase(str.find(part),part.length());
+        }
         return str;
     }
 };
