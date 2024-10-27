@@ -12,15 +12,22 @@ class Solution
             int currentProfit = prices[i] - minPrice;
             if (currentProfit > maxProfit) maxProfit = currentProfit;
 
-            // vaki recrusrion sambhal lega
+           	// vaki recrusrion sambhal lega
             return maxProfitRE(prices, i + 1, minPrice, maxProfit);
         }
 
     int maxProfit(vector<int> &prices)
     {
-        int minPrice = INT_MAX, maxProfit = INT_MIN;
+        int minPrice = INT_MAX, maxProft = INT_MIN;
 
-        maxProfitRE(prices, 0, minPrice, maxProfit);
-        return maxProfit;
+        for (auto price: prices)
+        {
+            if (price < minPrice) minPrice = price;
+
+            int todaysProfit = price - minPrice;
+            if (todaysProfit > maxProft) maxProft = todaysProfit;
+        }
+
+        return maxProft;
     }
 };
