@@ -3,126 +3,127 @@ class Solution
     public:
         string numberToWords_bySir(int num, vector<pair<int, string>> &mp)
         {
+            
 
-            if (num == 0) return "Zero";
+                if (num == 0) return "Zero";
 
-            for (auto it: mp)
-            {
-                if (num >= it.first)
+                for (auto it: mp)
                 {
+                    if (num >= it.first)
+                    {
 
-                    string a = "";
-                    if (num >= 100) a = numberToWords_bySir(num / it.first, mp) + " ";
+                        string a = "";
+                        if (num >= 100) a = numberToWords_bySir(num / it.first, mp) + " ";
 
-                    string b = it.second;
+                        string b = it.second;
 
-                    string c = "";
-                    if (num % it.first != 0) c = " " + numberToWords_bySir(num % it.first, mp);
+                        string c = "";
+                        if (num % it.first != 0) c = " " + numberToWords_bySir(num % it.first, mp);
 
-                    return a + b + c;
+                        return a + b + c;
+                    }
                 }
+                return "";
             }
-            return "";
-        }
 
-    string numberToWords(int num)
-    {
-        vector<pair<int, string>> mp
-        {
+            string numberToWords(int num)
             {
-                1000000000,
-                "Billion" },
-            {
-                1000000,
-                "Million" },
-            {
-                1000,
-                "Thousand" },
-            {
-                100,
-                "Hundred" },
-            {
-                90,
-                "Ninety" },
-            {
-                80,
-                "Eighty" },
-            {
-                70,
-                "Seventy" },
-            {
-                60,
-                "Sixty" },
-            {
-                50,
-                "Fifty" },
-            {
-                40,
-                "Forty" },
-            {
-                30,
-                "Thirty" },
-            {
-                20,
-                "Twenty" },
-            {
-                19,
-                "Nineteen" },
-            {
-                18,
-                "Eighteen" },
-            {
-                17,
-                "Seventeen" },
-            {
-                16,
-                "Sixteen" },
-            {
-                15,
-                "Fifteen" },
-            {
-                14,
-                "Fourteen" },
-            {
-                13,
-                "Thirteen" },
-            {
-                12,
-                "Twelve" },
-            {
-                11,
-                "Eleven" },
-            {
-                10,
-                "Ten" },
-            {
-                9,
-                "Nine" },
-            {
-                8,
-                "Eight" },
-            {
-                7,
-                "Seven" },
-            {
-                6,
-                "Six" },
-            {
-                5,
-                "Five" },
-            {
-                4,
-                "Four" },
-            {
-                3,
-                "Three" },
-            {
-                2,
-                "Two" },
-            {
-                1,
-                "One" },
+                vector<pair<int, string>> mp
+                {
+                    {
+                        1000000000,
+                        "Billion" },
+                    {
+                        1000000,
+                        "Million" },
+                    {
+                        1000,
+                        "Thousand" },
+                    {
+                        100,
+                        "Hundred" },
+                    {
+                        90,
+                        "Ninety" },
+                    {
+                        80,
+                        "Eighty" },
+                    {
+                        70,
+                        "Seventy" },
+                    {
+                        60,
+                        "Sixty" },
+                    {
+                        50,
+                        "Fifty" },
+                    {
+                        40,
+                        "Forty" },
+                    {
+                        30,
+                        "Thirty" },
+                    {
+                        20,
+                        "Twenty" },
+                    {
+                        19,
+                        "Nineteen" },
+                    {
+                        18,
+                        "Eighteen" },
+                    {
+                        17,
+                        "Seventeen" },
+                    {
+                        16,
+                        "Sixteen" },
+                    {
+                        15,
+                        "Fifteen" },
+                    {
+                        14,
+                        "Fourteen" },
+                    {
+                        13,
+                        "Thirteen" },
+                    {
+                        12,
+                        "Twelve" },
+                    {
+                        11,
+                        "Eleven" },
+                    {
+                        10,
+                        "Ten" },
+                    {
+                        9,
+                        "Nine" },
+                    {
+                        8,
+                        "Eight" },
+                    {
+                        7,
+                        "Seven" },
+                    {
+                        6,
+                        "Six" },
+                    {
+                        5,
+                        "Five" },
+                    {
+                        4,
+                        "Four" },
+                    {
+                        3,
+                        "Three" },
+                    {
+                        2,
+                        "Two" },
+                    {
+                        1,
+                        "One" },
+                };
+                return numberToWords_bySir(num, mp);
+            }
         };
-        return numberToWords_bySir(num, mp);
-    }
-};
