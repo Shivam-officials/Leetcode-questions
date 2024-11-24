@@ -22,13 +22,25 @@ class Solution
                 }
             }
            	// sub block check
-            for (int k = 0; k < 9; k++)
+            /**for (int k = 0; k < 9; k++)
             {
                 int x = 3 *(row / 3) + k / 3;
                 int y = 3 *(col / 3) + k % 3;
                 if (board[x][y] == option)
                 {
                     return false;
+                }
+            }
+            */
+            int startRow = row-(row % 3);
+            int startCol = col - (col % 3);
+            for(int i = 0 ; i < 3 ; i++){
+                for(int j = 0; j < 3; j++){
+                    int transalated_row = i+startRow;
+                    int transalated_col = j + startCol;
+                    if(board[transalated_row][transalated_col] == option){
+                        return false;
+                    }
                 }
             }
 
