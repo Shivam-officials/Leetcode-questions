@@ -2,72 +2,76 @@ class Solution
 {
     public:
 
-       
-bool isSafe(int newX, int newY, vector<vector<bool>> &visited) {
-  if (newX < 0 || newX >= visited.size() || newY < 0 || newY >= visited[0].size())
-    return false;
+        bool isSafe(int newX, int newY, vector<vector < bool>> &visited)
+        {
+            if (newX < 0 || newX >= visited.size() || newY < 0 || newY >= visited[0].size() || visited[newX][newY] == true)
+            {
+                return false;
+            }
+            return true;
+        }
 
-  if (visited[newX][newY] == true) {
-    return false;
-  } else {
-    return true;
-  }
-}
+    bool wordSearch(int curX, int curY, string &word, int index, vector<vector < char>> &grid, vector< vector< bool>> &visited)
+    {
 
-bool wordSearch(int curX, int curY, string &word,int index,  vector<vector<char>> &grid, vector<vector<bool>> &visited) {
+       	// base case
+        if (index == word.size() - 1)
+        {
+        	// every index is checked that the word matched at the current coordinates with current index already so if index is at last of word that means we found the words bcz bina check kiye to ayega ni is index pe word 
+            return true;
+        }
 
-  if (curX >= grid.size() || curX < 0 || curY >= grid[0].size() || curY < 0) {
-    return false;
-  }
+        vector<int> dx
+        { 0,
+            1,
+            0,
+            -1 };	// directions R,D,L,U
+        vector<int> dy
+        { 1,
+            0,
+            -1,
+            0 };
 
-  // cout << curX << " " << curY << endl;
+        bool surroundExist = false;
+        for (int i = 0; i < 4; i++)
+        {
+            int newX = curX + dx[i];
+            int newY = curY + dy[i];
+            if (isSafe(newX, newY, visited))
+            {
+            	// checks the side note has the next word before going there
+                if (grid[newX][newY] == word[index +1 ])
+                {
 
-  if (index == word.length()-1) {
-    // cout << "the current word is " << currentWord << endl;
-    return true;
-  }
-  vector<int> dx{0, 0, -1, 1};
-  vector<int> dy{-1, 1, 0, 0};
-  bool ans = false;
-  for (int i = 0; i < 4; i++) {
-    int newX = curX + dx[i];
-    int newY = curY + dy[i];
-
-    if (isSafe(newX, newY, visited)) {
-      visited[newX][newY] = true;
-    //   currentWord.push_back(grid[newX][newY]);
-      bool option1 = false;
-      if( grid[newX][newY] == word[index+1]){
-     option1 = wordSearch(newX, newY, word,index+1,  grid, visited);
-      }
-      
-      visited[newX][newY] = false;
-    //   currentWord.pop_back();
-
-      ans = ans || option1;
+                    visited[newX][newY] = true;
+                    bool ans = wordSearch(newX, newY, word, index + 1, grid, visited);
+                    visited[newX][newY] = false;
+                    surroundExist = surroundExist || ans;
+                }
+            }
+        }
+        return surroundExist;
     }
-  }
-  // currentWord.pop_back();
-  return ans;
-}
-bool exist(vector<vector<char>> &grid, string word) {
-  int m = grid.size(), n = grid[0].size();
-  bool option1 = false;
 
-  for (int i = 0; i < m; i++) {
-    for (int j = 0; j < n; j++) {
-    if(grid[i][j]==word[0]){
-        
-      vector<vector<bool>> visited(m, vector<bool>(n, false));
-      visited[i][j] = true;
-      string currentWord = "";
-      currentWord.push_back(grid[i][j]);
-      bool ans = wordSearch(i, j, word,0, grid, visited);
-      option1 = option1 || ans;
-    }
-    }
-  }
+    bool exist(vector<vector < char>> &grid, string &word)
+    {
 
-  return option1;
-}
+        int m = grid.size(), n = grid[0].size();
+        bool exist = false;
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (grid[i][j] == word[0])
+                {
+                    vector<vector < bool>> visited(m, vector<bool> (n, false));
+                    visited[i][j] = true;
+                    bool ans = wordSearch(i, j, word, 0, grid, visited);
+                    exist = ans || exist;
+                }
+            }
+        }
+
+        return exist;
+    }
 };
