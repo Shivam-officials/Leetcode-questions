@@ -1,16 +1,18 @@
 class Solution
 {
     public:
-        bool checkPossible(vector<int> &matchSticks, int index, int &L, int &U, int &R, int &D, int &sum4th)
+
+        bool checkPossible(vector<int> &matchSticks, int index, vector<int> &sides, int &sum4th)
         {
-           	//base case
-            if (L > sum4th || U > sum4th || R > sum4th || D > sum4th)
+           	// base case
+            if (sides[0] > sum4th || sides[1] > sum4th || sides[2] > sum4th || sides[3] > sum4th)
             {
                 return false;
             }
+
             if (index == matchSticks.size())
             {
-                if (L == U && L == R && L == D)
+                if (sides[0] == sides[1] && sides[0] == sides[2] && sides[0] == sides[3])
                 {
                     return true;
                 }
@@ -19,32 +21,20 @@ class Solution
 
             int currentElement = matchSticks[index];
 
-            L += currentElement;
-            bool option1 = checkPossible(matchSticks, index + 1, L, U, R, D, sum4th);
-            L -= currentElement;
-            if (option1) return true;
+           	//   bool ans = false;
 
-            U += currentElement;
-            bool option2 = checkPossible(matchSticks, index + 1, L, U, R, D, sum4th);
-            U -= currentElement;
-            if (option2) return true;
-
-            R += currentElement;
-            bool option3 = checkPossible(matchSticks, index + 1, L, U, R, D, sum4th);
-            R -= currentElement;
-            if (option3) return true;
-
-            D += currentElement;
-            bool option4 = checkPossible(matchSticks, index + 1, L, U, R, D, sum4th);
-            D -= currentElement;
-            if (option4) return true;
-
+            for (int i = 0; i < 4; i++)
+            {
+                sides[i] += currentElement;
+                bool ans = checkPossible(matchSticks, index + 1, sides, sum4th);
+                if (ans == true) return true;
+                sides[i] -= currentElement;
+            }
             return false;
         }
 
     bool makesquare(vector<int> &matchSticks)
     {
-        int L = 0, U = 0, R = 0, D = 0;
         int sum = accumulate(matchSticks.begin(), matchSticks.end(), 0);
 
         int sum4th = sum / 4;
@@ -52,9 +42,11 @@ class Solution
         {
             return false;
         }
+        vector<int> sides
+        { 0,0,0,0 };
 
         sort(matchSticks.rbegin(), matchSticks.rend());	// sort in reverse order means decreasing order
 
-        return checkPossible(matchSticks, 0, L, U, R, D, sum4th);
+        return checkPossible(matchSticks, 0, sides, sum4th);
     }
 };
