@@ -26,7 +26,7 @@ class Solution
             for (int i = 0; i < 4; i++)
             {
                 sides[i] += currentElement;
-                bool ans = checkPossible(matchSticks, index + 1, sides, sum4th);
+                bool ans = ans ||  checkPossible(matchSticks, index + 1, sides, sum4th);
                 if (ans == true) return true;
                 sides[i] -= currentElement;
             }
@@ -42,8 +42,7 @@ class Solution
         {
             return false;
         }
-        vector<int> sides
-        { 0,0,0,0 };
+        vector<int> sides{ 0,0,0,0 };
 
         sort(matchSticks.rbegin(), matchSticks.rend());	// sort in reverse order means decreasing order
 
