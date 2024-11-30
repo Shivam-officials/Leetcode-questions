@@ -37,16 +37,16 @@ public:
 }
 
 bool makesquare(vector<int> & matchSticks){
- int L = 0, U = 0,R = 0, D = 0;
- int sum = 0;
- sort(matchSticks.rbegin(),matchSticks.rend());
- for(auto elm:matchSticks){
-    sum += elm;
- }
- int sum4th = sum/4;
- if(sum % 4 == 0){
- return checkPossible(matchSticks,0,L,U,R,D,sum4th);
- }
- return false;
+ int L = 0, U = 0, R = 0, D = 0;
+  int sum = accumulate(matchSticks.begin(),matchSticks.end(),0);
+
+  int sum4th = sum / 4;
+  if (sum % 4 != 0) {
+    return false;
+  }
+
+  sort(matchSticks.rbegin(),matchSticks.rend()); // sort in reverse order means decreasing order
+
+  return checkPossible(matchSticks, 0, L, U, R, D, sum4th);
 }
 };
