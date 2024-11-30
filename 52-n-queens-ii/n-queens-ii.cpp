@@ -6,10 +6,7 @@ unordered_map<int, bool> upDiagonal;
 unordered_map<int, bool> rowCheck;
 unordered_map<int, bool> downDiagonal;
 
-/**
- * @brief Stores the current board configuration in the results.
- * @complexity Time: O(n^2), Space: O(n)
- */
+
 void storeResult(vector<vector<char>> board, vector<vector<string>> &ans) {
     vector<string> tempAns;
     for (auto row : board) {
@@ -22,12 +19,9 @@ void storeResult(vector<vector<char>> board, vector<vector<string>> &ans) {
     ans.push_back(tempAns);
 }
 
-/**
- * @brief Checks if placing a queen is safe.
- * @complexity Time: O(1), Space: O(1)
- */
+
 bool isSafe(vector<vector<char>> &board, int row, int col) {
-    // return !rowCheck[row] && !upDiagonal[row - col] && !downDiagonal[row + col]; // complex way
+    
 
     if(rowCheck[row]==true)return false;
     if(upDiagonal[row-col] == true) return false;
@@ -36,10 +30,7 @@ bool isSafe(vector<vector<char>> &board, int row, int col) {
     return true;
 }
 
-/**
- * @brief Solves N-Queens using backtracking.
- * @complexity Time: O(n!), Space: O(n) (recursion stack)
- */
+
 void solveNQueens_Backtrack(vector<vector<char>> &board, int col, int n, vector<vector<string>> &ans) {
     if (col == n) {
         storeResult(board, ans);
@@ -59,10 +50,7 @@ void solveNQueens_Backtrack(vector<vector<char>> &board, int col, int n, vector<
     }
 }
 
-/**
- * @brief Generates all solutions to the N-Queens problem.
- * @complexity Time: O(n!), Space: O(n^2 + n!) [n^2 for board and n! for all other possible configuratins of queens]
- */
+
 vector<vector<string>> solveNQueens(int n) {
     vector<vector<char>> board(n, vector<char>(n, '.'));
     vector<vector<string>> ans;
