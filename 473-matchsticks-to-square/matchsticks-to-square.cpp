@@ -26,7 +26,7 @@ class Solution
             for (int i = 0; i < 4; i++)
             {
                 sides[i] += currentElement;
-                bool ans = ans ||  checkPossible(matchSticks, index + 1, sides, sum4th);
+                bool ans =  checkPossible(matchSticks, index + 1, sides, sum4th);
                 if (ans == true) return true;
                 sides[i] -= currentElement;
             }
