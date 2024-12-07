@@ -58,65 +58,7 @@ class Solution
         }
     }
 
-    void mergeWithSorting(std::vector<int> &nums, int start, int end)
-    {
-        int mid = (start + end) / 2;
-
-       	// Using std::vector for temporary arrays (recommended)
-        std::vector<int> leftSide
-        {
-            nums.begin() + start, nums.begin() + mid + 1
-        };	// includes element at mid
-        std::vector<int> rightSide
-        {
-            nums.begin() + mid + 1, nums.begin() + end + 1
-        };	// includes element at end
-
-       	// Alternative using dynamic arrays (not recommended due to manual memory management)
-        /*
-        int leftSize = mid - start + 1;
-        int rightSize = end - mid;
-        int* leftSide = new int[leftSize];
-        int* rightSide = new int[rightSize];
-
-       	// Copy elements into leftSide and rightSide
-        std::copy(nums.begin() + start, nums.begin() + mid + 1, leftSide);
-        std::copy(nums.begin() + mid + 1, nums.begin() + end + 1, rightSide);
-        */
-
-        int li = 0, ri = 0, index = start;
-
-       	// Merging process
-        while (li < leftSide.size() && ri < rightSide.size())
-        {
-            if (leftSide[li] < rightSide[ri])
-            {
-                nums[index++] = leftSide[li++];
-            }
-            else
-            {
-                nums[index++] = rightSide[ri++];
-            }
-        }
-
-       	// Copy any remaining elements from leftSide
-        while (li < leftSide.size())
-        {
-            nums[index++] = leftSide[li++];
-        }
-
-       	// Copy any remaining elements from rightSide
-        while (ri < rightSide.size())
-        {
-            nums[index++] = rightSide[ri++];
-        }
-
-       	// If using dynamic arrays, free the memory after merging
-        /*
-        delete[] leftSide;
-        delete[] rightSide;
-        */
-    }
+    
 
     void mergeSort(vector<int> &nums, int start, int end)
     {
@@ -129,7 +71,7 @@ class Solution
         mergeSort(nums, mid + 1, end);
 
        	// Merge the sorted halves in place
-        mergeWithSorting(nums, start,  end);
+        merge2(nums, start, mid, end);
     }
 
     vector<int> sortArray(vector<int> &nums)
