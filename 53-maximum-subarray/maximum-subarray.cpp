@@ -12,19 +12,18 @@ public:
 
     for (int i = mid; i >= start; i--) {
         leftBorderSum += nums[i];
-        // if(leftBorderSum>maxLeftBorderSum){ maxLeftBorderSum = leftBorderSum;};
-        maxLeftBorderSum = max(maxLeftBorderSum,leftBorderSum);
+        if(leftBorderSum>maxLeftBorderSum){ maxLeftBorderSum = leftBorderSum;};
+        // maxLeftBorderSum = max(maxLeftBorderSum,leftBorderSum);
     }
 
     for (int i = mid+1; i <= end; i++) {
         rightBorderSum += nums[i];
-        // if(rightBorderSum>maxRightBorderSum){ maxRightBorderSum = rightBorderSum; };
-        maxRightBorderSum = max(maxRightBorderSum,rightBorderSum);
+        if(rightBorderSum>maxRightBorderSum){ maxRightBorderSum = rightBorderSum; };
+        // maxRightBorderSum = max(maxRightBorderSum,rightBorderSum);
     }
 
     int crossBorderSum = maxLeftBorderSum + maxRightBorderSum;
-    // cout << maxLeftSum<<" "<< maxLeftBorderSum<<" "<<maxRightBorderSum <<" "<<maxRightSum <<endl;
-    return max(maxLeftSum,max(maxRightSum,crossBorderSum));
+     return max(maxLeftSum,max(maxRightSum,crossBorderSum));
 
 }
 
