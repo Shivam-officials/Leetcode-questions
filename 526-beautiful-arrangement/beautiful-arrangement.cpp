@@ -6,21 +6,7 @@ class Solution
            	// base case
             if (start == nums.size())
             {
-                // bool valid = true;
-                // for (int i = 0; i < nums.size(); i++)
-                // {
-                //     // if (!(nums[i] % (i + 1) == 0 || (i + 1) % nums[i] == 0))
-                //     // {
-                //     //     valid = false;
-                //     //     break;
-                //     // }
-                //     // cout << nums[i] << " ";
-                // }
-                // if (valid)
-                // {
                     ans++;
-                // }
-                // cout << endl;
                 return;
             }
 
