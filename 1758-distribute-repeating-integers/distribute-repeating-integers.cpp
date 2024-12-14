@@ -33,14 +33,14 @@ bool canDistribute(vector<int>& nums, vector<int>& quantity) {
   }
   for (auto pair : occurances) {
     count.push_back(pair.second);
-   cout << pair.first<<" "<<pair.second <<endl;
+//    cout << pair.first<<" "<<pair.second <<endl;
   }
   
 
 
    sort(quantity.rbegin(),quantity.rend());
   
-//   return canDistributeHelper_ME(nums,quantity,occurances,0);      
+
   return canDistributeHelper_Sir(nums,quantity,count,0);      
 }
 };
