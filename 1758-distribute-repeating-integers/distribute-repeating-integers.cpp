@@ -28,10 +28,10 @@ bool canDistribute(vector<int>& nums, vector<int>& quantity) {
   bool ans = false;
   unordered_map<int, int>occurances;
   vector<int>count;
-  for (auto elm : nums) {
+  for (auto &elm : nums) {
    occurances[elm]++;
   }
-  for (auto pair : occurances) {
+  for (auto &pair : occurances) {
     count.push_back(pair.second);
 //    cout << pair.first<<" "<<pair.second <<endl;
   }
