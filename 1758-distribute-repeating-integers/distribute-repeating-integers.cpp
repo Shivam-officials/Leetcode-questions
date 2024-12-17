@@ -16,14 +16,14 @@ class Solution
             {
                 if (currentQuantity <= occur)
                 {
-                    occur = occur - currentQuantity;
+                    occur -= currentQuantity;
                   
                     if (canDistributeHelper_Sir( quantity, occurances, start + 1))
                     {
                         return true;
                     }
                    	
-                    occur = occur + currentQuantity;
+                    occur += currentQuantity;
                 }
             }
             return false;
