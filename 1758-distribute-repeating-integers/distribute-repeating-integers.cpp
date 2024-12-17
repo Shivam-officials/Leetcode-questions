@@ -12,18 +12,20 @@ class Solution
 
             int currentQuantity = quantity[start];
 
-            for (auto &occur: occurances)
+            // for (auto &occur: occurances)
+            for(int i = 0; i < occurances.size(); i++)
             {
-                if (currentQuantity <= occur)
+
+                if (currentQuantity <= occurances[i])
                 {
-                    occur = occur - currentQuantity;
+                    occurances[i] = occurances[i] - currentQuantity;
                    	//  visited[start] = true;
                     if (canDistributeHelper_Sir( quantity, occurances, start + 1))
                     {
                         return true;
                     }
                    	// visited[start] = false;
-                    occur = occur + currentQuantity;
+                    occurances[i] = occurances[i] + currentQuantity;
                 }
             }
             return false;
