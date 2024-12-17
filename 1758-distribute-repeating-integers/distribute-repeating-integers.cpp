@@ -2,7 +2,7 @@ class Solution
 {
     public:
 
-        bool canDistributeHelper_Sir(vector<int> &quantity, vector< int > occurances, int start)
+        bool canDistributeHelper_Sir(vector<int> &quantity, vector< int > &occurances, int start)
         {
            	//base case 
             if (start == quantity.size())
