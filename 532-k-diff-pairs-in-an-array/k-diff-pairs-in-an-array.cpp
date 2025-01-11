@@ -1,18 +1,35 @@
 class Solution
 {
     public:
-
-
-    int findPairs(vector<int> &nums, int k)
-    {
-        set<pair<int, int>> sets;
-        sort(nums.begin(), nums.end());
-        for (int i = 0; i < nums.size(); i++)
+        int findPairs(vector<int> &nums, int k)
         {
-            int elementToFind = nums[i] + k;
-            if (binary_search(nums.begin()+i+1,nums.end(), elementToFind)) sets.insert({ nums[i],
-                elementToFind });
+            set<pair<int, int>> setOfSets;
+            int low = 0;
+            sort(nums.begin(), nums.end());
+            int high = low + 1;
+            while (high <= nums.size() - 1)
+            {
+                int diff = nums[high] - nums[low];
+
+                if (k == diff)
+                {
+                    setOfSets.insert({ nums[low],
+                        nums[high] });
+                    // low++;
+                    high++;
+                }
+                else if (diff > k)
+                {
+                    low++;
+                }
+                else
+                {
+                    high++;
+                }
+
+                if (low == high) high++;
+            }
+
+            return setOfSets.size();
         }
-        return sets.size();
-    }
 };
