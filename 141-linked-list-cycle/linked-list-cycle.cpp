@@ -12,7 +12,7 @@ public:
         unordered_map<ListNode*,bool> map;
         ListNode* cur = head;
         while(cur != nullptr){
-            if(map.find(cur) != map.end() ){
+            if(map[cur] == true ){
                 return true;
             }
 
