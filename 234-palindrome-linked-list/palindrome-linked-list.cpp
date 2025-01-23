@@ -12,7 +12,7 @@ class Solution
 {
     public:
 
-        ListNode* reverseListIteratively(ListNode *head)
+        ListNode* reverseListIteratively(ListNode* &head)
         {
             ListNode *prev = nullptr;
             ListNode *curr = head;
