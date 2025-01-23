@@ -11,7 +11,7 @@
 class Solution {
 public:
 
-    ListNode* reverseLinkedListRecursively(ListNode* prev, ListNode* curr){
+    ListNode* reverseLinkedListRecursively(ListNode* &prev, ListNode* &curr){
     //base case
     if(curr == nullptr){
         return prev;
