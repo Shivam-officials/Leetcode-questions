@@ -19,16 +19,16 @@ public:
         if(prev->val == curr->val){
             ListNode* forward = curr->next;
 
-            if( forward != nullptr){
+            // if( forward != nullptr){
                prev->next = forward;
                curr->next = nullptr;
                delete curr;
                curr = forward;
-            }else{
-                prev->next = nullptr;
-                delete curr;
-                curr = nullptr;
-            }
+            // }else{
+                // prev->next = nullptr;
+                // delete curr;
+                // curr = nullptr;
+            // }
 
             
         }else{
