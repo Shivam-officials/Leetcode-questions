@@ -29,11 +29,16 @@ public:
                 delete curr;
                 curr = nullptr;
             }
+
+            // delete forward; 
         }else{
             prev = curr;
             curr = curr->next;
         }
       }
+      
+    //   delete curr;
+    //   delete prev;
       return head;
     }
 };
