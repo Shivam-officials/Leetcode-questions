@@ -42,7 +42,7 @@ class Solution
             return length;
         }
 
-    ListNode* reverseKGroup(ListNode *head, int k)
+    ListNode* reverseKGroup(ListNode *head, int &k)
             // {
             //     int count = 0;
             //     ListNode *prev = nullptr;	// End of the previous processed group
