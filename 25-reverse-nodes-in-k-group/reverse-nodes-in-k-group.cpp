@@ -32,7 +32,7 @@ class Solution
             //     groupStart = prev;
             //     groupEnd = forEnd;	// Update groupEnd to the original groupStart
             // }
-        int getLength(ListNode* start){
+        int getLength(ListNode* &start){
             ListNode* curr= start;
             int length = 0;
             while(curr != nullptr){
