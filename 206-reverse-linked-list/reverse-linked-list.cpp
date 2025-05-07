@@ -11,7 +11,7 @@
 class Solution {
 public:
 
-    ListNode* reverseListRe(ListNode* prev, ListNode* curr){
+    ListNode* reverseListRe(ListNode* &prev, ListNode* &curr){
         if(curr == nullptr) return prev;
 
         ListNode* forward = curr->next;
