@@ -11,15 +11,17 @@
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-       ListNode* rabbit = head;
-       ListNode* tortoise = head;
-       while(rabbit != nullptr){
-        rabbit = rabbit->next;
-        if(rabbit != nullptr){
-            rabbit = rabbit->next;
-            tortoise = tortoise->next;
+      ListNode* tt = head;
+      ListNode* rt = head;
+      while(rt != nullptr){
+        rt = rt->next;
+        if(rt!=nullptr){
+            rt = rt->next;
+            
+                tt = tt->next;
+            
         }
-       }
-      return tortoise; 
+      }
+      return tt;
     }
 };
