@@ -11,42 +11,21 @@ class Solution
     public:
         bool hasCycle(ListNode *head)
         {
-          /*  
+         ListNode* rt = head;
+         ListNode* tt = head;
 
-           	//edge cases
-            if (head == nullptr) return false;
-            if (head->next == nullptr) return false;
-            ListNode *rabbit = head;
-            ListNode *tort = head;
-            while (rabbit != nullptr)
-            {
-                rabbit = rabbit->next;
+        if(head == nullptr || head->next == nullptr)return false;
 
-                if (rabbit != nullptr)
-                {
-
-                    rabbit = rabbit->next;
-                    tort = tort->next;
-
-                    if (rabbit == tort)
-                    {
-                        return true;
-                    }
-                }
+        while(rt != nullptr){
+            rt= rt->next;
+            if(rt!=nullptr){
+                rt=rt->next;
+                tt = tt->next;
+                cout<<rt<<"=="<<tt<<endl;
+               
             }
-            return false;
-        */
-
-        unordered_map<ListNode*,int> map;
-        ListNode* temp = head;
-        while(temp != nullptr){
-            if(map[temp]>=1){
-                return true;
-            }
-            map[temp]++;
-            // cout<<temp<<"-"<<map[temp]<<endl;
-            temp= temp->next;
+             if(rt==tt)return true;
         }
-        return false;
+       return false;
         }
 };
