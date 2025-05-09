@@ -11,20 +11,20 @@
 class Solution
 {
     public:
-
-        ListNode* reverseListIteratively(ListNode* &head)
+/*
+    ListNode* reverseListIteratively(ListNode* &head)
+    {
+        ListNode *prev = nullptr;
+        ListNode *curr = head;
+        while (curr != nullptr)
         {
-            ListNode *prev = nullptr;
-            ListNode *curr = head;
-            while (curr != nullptr)
-            {
-                ListNode *forward = curr->next;
-                curr->next = prev;
-                prev = curr;
-                curr = forward;
-            }
-            return prev;
+            ListNode *forward = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = forward;
         }
+        return prev;
+    }
 
     ListNode* middleNode(ListNode* &head, ListNode* &midkPahleWalaNode)
     {
@@ -56,41 +56,72 @@ class Solution
        	// the tortoise pointer will be at the middle of the list.
         return tortoise;
     }
+*/
 
+    //v2 
+    ListNode* insertAtHead(ListNode* &head,int &value){
+        ListNode* newNode = new ListNode(value);
+        if(head == nullptr){
+            head = newNode;
+        }else{
+            newNode->next = head;
+            head = newNode;
+        }
+        return head;
+    }
     bool isPalindrome(ListNode *head)
     {
-        //edge cases 
-        if(head->next == nullptr){
-            return true;
-        }
-
-        if(head->next->next == nullptr){
-            if(head->val == head->next->val){
+        /*
+            //edge cases 
+            if(head->next == nullptr){
                 return true;
-            }else{
-                return false;
             }
-        }
 
-        ListNode *midKPhleWalaNode = nullptr;
-        ListNode *newHead = middleNode(head, midKPhleWalaNode);
+            if(head->next->next == nullptr){
+                if(head->val == head->next->val){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
 
-       	//breaking the Linked List
-        midKPhleWalaNode->next = nullptr;
+            ListNode *midKPhleWalaNode = nullptr;
+            ListNode *newHead = middleNode(head, midKPhleWalaNode);
 
-        newHead = reverseListIteratively(newHead);
-        ListNode *firsthead = head;
-        ListNode *reversedHead = newHead;
+            //breaking the Linked List
+            midKPhleWalaNode->next = nullptr;
 
-        while (firsthead != nullptr)
-        {
-            if (firsthead->val != reversedHead->val)
+            newHead = reverseListIteratively(newHead);
+            ListNode *firsthead = head;
+            ListNode *reversedHead = newHead;
+
+            while (firsthead != nullptr)
             {
-                return false;
+                if (firsthead->val != reversedHead->val)
+                {
+                    return false;
+                }
+                firsthead = firsthead->next;
+                reversedHead = reversedHead->next;
             }
-            firsthead = firsthead->next;
-            reversedHead = reversedHead->next;
+            return true;
+        */
+        ListNode* temp = head;
+        ListNode*  newLLHead = nullptr;
+        while(temp != nullptr){
+            newLLHead = insertAtHead(newLLHead,temp->val);
+            temp = temp->next;
         }
-        return true;
+        ListNode* tempNew = newLLHead;
+         temp = head;
+
+        while(tempNew != nullptr){
+            cout<<tempNew->val << "=="<<temp->val<<endl;
+            if(tempNew-> val != temp->val) return false;
+            tempNew = tempNew->next;
+            temp = temp->next;
+        }
+    return true;
+
     }
 };
