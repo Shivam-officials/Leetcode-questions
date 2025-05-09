@@ -57,8 +57,8 @@ class Solution
         return tortoise;
     }
 */
-
-    //v2 
+/*
+    //v2 tc =  O(N) sc = O(N)
     ListNode* insertAtHead(ListNode* &head,int &value){
         ListNode* newNode = new ListNode(value);
         if(head == nullptr){
@@ -69,58 +69,59 @@ class Solution
         }
         return head;
     }
+*/
     bool isPalindrome(ListNode *head)
     {
+        
+
         /*
-            //edge cases 
-            if(head->next == nullptr){
-                return true;
+            ListNode* temp = head;
+            ListNode*  newLLHead = nullptr;
+            while(temp != nullptr){
+                insertAtHead(newLLHead,temp->val);
+                temp = temp->next;
             }
+            ListNode* tempNew = newLLHead;
+            temp = head;
 
-            if(head->next->next == nullptr){
-                if(head->val == head->next->val){
-                    return true;
-                }else{
-                    return false;
-                }
+            while(tempNew != nullptr){
+                cout<<tempNew->val << "=="<<temp->val<<endl;
+                if(tempNew-> val != temp->val) return false;
+                tempNew = tempNew->next;
+                temp = temp->next;
             }
-
-            ListNode *midKPhleWalaNode = nullptr;
-            ListNode *newHead = middleNode(head, midKPhleWalaNode);
-
-            //breaking the Linked List
-            midKPhleWalaNode->next = nullptr;
-
-            newHead = reverseListIteratively(newHead);
-            ListNode *firsthead = head;
-            ListNode *reversedHead = newHead;
-
-            while (firsthead != nullptr)
-            {
-                if (firsthead->val != reversedHead->val)
-                {
-                    return false;
-                }
-                firsthead = firsthead->next;
-                reversedHead = reversedHead->next;
-            }
-            return true;
-        */
-        ListNode* temp = head;
-        ListNode*  newLLHead = nullptr;
-        while(temp != nullptr){
-            insertAtHead(newLLHead,temp->val);
-            temp = temp->next;
+         return true;
+    */
+    ListNode* midkpahleKanode =head;
+    ListNode* rt = head;
+    ListNode* tt = head;
+    while(rt != nullptr){
+        rt = rt -> next;
+        if(rt!=nullptr){
+            rt = rt->next;
+            midkpahleKanode = tt;
+            tt = tt->next;
         }
-        ListNode* tempNew = newLLHead;
-         temp = head;
+    }
 
-        while(tempNew != nullptr){
-            cout<<tempNew->val << "=="<<temp->val<<endl;
-            if(tempNew-> val != temp->val) return false;
-            tempNew = tempNew->next;
-            temp = temp->next;
+    midkpahleKanode->next = nullptr;
+    ListNode* prev = nullptr;
+    while(tt != nullptr){
+        ListNode* forward = tt->next;
+        tt->next = prev;
+        prev = tt;
+        tt = forward;
+    }
+    
+    ListNode* temp1 = head;
+    ListNode* temp2 = prev;
+    while(temp1 != nullptr && temp2 !=nullptr){
+        if(temp1->val != temp2->val){
+            return false;
         }
+        temp1 =temp1->next;
+        temp2= temp2->next;
+    }
     return true;
 
     }
