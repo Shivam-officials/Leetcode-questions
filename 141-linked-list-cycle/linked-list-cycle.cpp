@@ -22,9 +22,9 @@ class Solution
                 rt=rt->next;
                 tt = tt->next;
                 cout<<rt<<"=="<<tt<<endl;
-               
+                if(rt==tt)return true;
             }
-             if(rt==tt)return true;
+            
         }
        return false;
         }
