@@ -109,7 +109,7 @@ class Solution
         ListNode* temp = head;
         ListNode*  newLLHead = nullptr;
         while(temp != nullptr){
-            newLLHead = insertAtHead(newLLHead,temp->val);
+            insertAtHead(newLLHead,temp->val);
             temp = temp->next;
         }
         ListNode* tempNew = newLLHead;
